@@ -1,10 +1,13 @@
 package com.example.jonmid.contactosbasededatos.Views;
 
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.jonmid.contactosbasededatos.ContactsActivity;
 import com.example.jonmid.contactosbasededatos.Helpers.SqliteHelper;
@@ -45,5 +48,21 @@ public class DeleteActivity extends AppCompatActivity {
         startActivity(intent);
 
     }
+
+
+    public void Eliminar(View view){
+
+        //Toast.makeText(this,"Mi id:  "+Id.getText(),Toast.LENGTH_SHORT).show();
+
+        SQLiteDatabase db = sqliteHelper.getReadableDatabase();
+        Cursor cursor = db.rawQuery("Delete from users where id=",null);
+
+        cursor.close();
+        Toast.makeText(this,"Contacto Eliminado",Toast.LENGTH_SHORT).show();
+
+        Cancelar(view);
+
+    }
+
 
 }
